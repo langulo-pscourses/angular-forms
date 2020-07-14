@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ps-demo"
+    }
+  },
+  "defaultProject": "ps-demo",
+  "cli": {
+    "analytics": "efb073e6-3c78-47cc-8e8e-81f352e9a713"
+  }
 }
