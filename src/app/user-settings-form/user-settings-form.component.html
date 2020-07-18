@@ -4,7 +4,7 @@
   <form #form="ngForm">
     <div class="form-group">
       <label for="name">Name</label>
-      <input id="name" name="name" class="form-control" placeholder="name" ngModel/>
+      <input id="name" name="name" class="form-control" placeholder="name" [(ngModel)]="userSettings.name" />
     </div>
 
     <div class="form-check form-group">
@@ -13,7 +13,7 @@
         type="checkbox"
         id="email-offers"
         name="email-offers"
-        ngModel
+        [(ngModel)]="userSettings.emailOffers"
       />
       <label for="email-offers" class="form-check-label">
         Email special offers
@@ -29,7 +29,7 @@
           id="lightInterface"
           value="light"
           checked
-          ngModel
+          [(ngModel)]="userSettings.interfaceStyle"
         />
         <label class="form-check-label" for="lightInterface">Light</label>
       </div>
@@ -41,7 +41,7 @@
           name="interfaceStyle"
           id="mediumInterface"
           value="medium"
-          ngModel
+          [(ngModel)]="userSettings.interfaceStyle"
         />
         <label class="form-check-label" for="mediumInterface">Medium</label>
       </div>
@@ -53,7 +53,7 @@
           name="interfaceStyle"
           id="darkInterface"
           value="dark"
-          ngModel
+          [(ngModel)]="userSettings.interfaceStyle"
         />
         <label class="form-check-label" for="darkInterface">Dark</label>
       </div>
@@ -61,7 +61,7 @@
 
     <div class="form-group">
       <label for="subscriptionType">Subscription Type</label>
-      <select class="form-control" id="subscriptionType" name="subscriptionType" ngModel>
+      <select class="form-control" id="subscriptionType" name="subscriptionType" [(ngModel)]="userSettings.subscriptionType">
         <option>Monthly</option>
         <option>Annual</option>
         <option>Lifetime</option>
@@ -75,7 +75,7 @@
         name="notes"
         class="form-control"
         rows="3"
-        ngModel
+        [(ngModel)]="userSettings.notes"
       ></textarea>
     </div>
 
