@@ -1,7 +1,8 @@
 <!-- ngModel directive adds form fields to the ngForm data model instance -->
 <div class="container">
   <h2>User settings</h2>
-  <form #form="ngForm">
+  <!-- On submit, send the form reference variable to onSubmit() -->
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
     <div class="form-group">
       <label for="name">Name</label>
       <input
@@ -12,9 +13,11 @@
         [(ngModel)]="userSettings.name"
         required
         #nameField="ngModel"
+        [class.field-error]="form.submitted && nameField.invalid"
+        (blur)="onBlur(nameField)"
       />
       <!-- hidden is true if either of these is true -->
-      <div [hidden]="nameField.valid || nameField.untouched"
+      <div [hidden]="!form.submitted || nameField.valid"
         class="alert alert-danger"
       >
         Enter a name
