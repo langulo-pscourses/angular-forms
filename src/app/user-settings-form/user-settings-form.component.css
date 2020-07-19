@@ -1,0 +1,5 @@
+/* using two selectors like this means that the styling will only be applied when both selectors 
+    are in the tags. So the elements affected must have both ng-invalid and ng-touched, but not be part of a <form> */
+.ng-invalid:not(form).ng-touched {
+    border: 1px solid red;
+}
