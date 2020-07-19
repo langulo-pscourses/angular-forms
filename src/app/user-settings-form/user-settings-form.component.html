@@ -1,10 +1,27 @@
 <!-- ngModel directive adds form fields to the ngForm data model instance -->
 <div class="container">
   <h2>User settings</h2>
-  <form #form="ngForm">
+  <!-- On submit, send the form reference variable to onSubmit() -->
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
     <div class="form-group">
       <label for="name">Name</label>
-      <input id="name" name="name" class="form-control" placeholder="name" [(ngModel)]="userSettings.name" />
+      <input
+        id="name"
+        name="name"
+        class="form-control"
+        placeholder="name"
+        [(ngModel)]="userSettings.name"
+        required
+        #nameField="ngModel"
+        [class.field-error]="form.submitted && nameField.invalid"
+        (blur)="onBlur(nameField)"
+      />
+      <!-- hidden is true if either of these is true -->
+      <div [hidden]="!form.submitted || nameField.valid"
+        class="alert alert-danger"
+      >
+        Enter a name
+      </div>
     </div>
 
     <div class="form-check form-group">
@@ -61,7 +78,12 @@
 
     <div class="form-group">
       <label for="subscriptionType">Subscription Type</label>
-      <select class="form-control" id="subscriptionType" name="subscriptionType" [(ngModel)]="userSettings.subscriptionType">
+      <select
+        class="form-control"
+        id="subscriptionType"
+        name="subscriptionType"
+        [(ngModel)]="userSettings.subscriptionType"
+      >
         <option>Monthly</option>
         <option>Annual</option>
         <option>Lifetime</option>
