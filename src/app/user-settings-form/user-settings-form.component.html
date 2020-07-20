@@ -84,9 +84,10 @@
         name="subscriptionType"
         [(ngModel)]="userSettings.subscriptionType"
       >
-        <option>Monthly</option>
-        <option>Annual</option>
-        <option>Lifetime</option>
+      <!-- Use async pipe because subscriptionTypes comes from an observable -->
+        <option *ngFor="let type of subscriptionTypes | async">
+          {{type}}
+        </option>
       </select>
     </div>
 
