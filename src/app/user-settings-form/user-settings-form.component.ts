@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserSettings } from '../data/user-settings';
 import { NgForm, NgModel } from '@angular/forms';
+import { DataService } from '../data/data.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-settings-form',
@@ -17,10 +19,16 @@ export class UserSettingsFormComponent implements OnInit {
   };
 
   userSettings = { ...this.originalUserSettings };
+  error = false;
+  errorMessage = '';
+  subscriptionTypes: Observable<string[]>;
 
-  constructor() {}
+  constructor(private dataService: DataService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // use observables to simulate getting the types via an http request
+    this.subscriptionTypes = this.dataService.getSubscriptionTypes();
+  }
 
   // blur handler (event for when a field loses focus)
   onBlur(field: NgModel): void {
@@ -29,6 +37,25 @@ export class UserSettingsFormComponent implements OnInit {
 
   // submit handler for the form
   onSubmit(form: NgForm): void {
-    console.log('in onSubmit: ', form.valid);
+    if (form.valid) {
+      this.dataService.postUserSettingsForm(this.userSettings).subscribe(
+        (result) => console.log('success: ', result),
+        (error) => this.handleError(error)
+      );
+    } else {
+      this.handleError({
+        message: 'Please fix the above errors before submitting',
+      });
+    }
+  }
+
+  handleError(error: any): void {
+    console.log(error);
+    this.error = true;
+    this.errorMessage = error.message;
+    setTimeout(() => {
+      this.error = false;
+      this.errorMessage = '';
+    }, 3000);
   }
 }
