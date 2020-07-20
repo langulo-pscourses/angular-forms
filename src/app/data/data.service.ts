@@ -6,14 +6,16 @@ import { HttpClient } from '@angular/common/http';
 // since it's provided in root, it doesnt have to be registered manually in
 // app.module.ts
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DataService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   postUserSettingsForm(userSettings: UserSettings): Observable<any> {
-    return this.http.post('myUrl', userSettings);
-    // return of(userSettings);  // dummy return
+    // putsreq endpoint will expire, so replace with new to test later
+    return this.http.post(
+      'https://putsreq.com/AfZtOQ04AFSUN9StFgMD',
+      userSettings
+    );
   }
 }
