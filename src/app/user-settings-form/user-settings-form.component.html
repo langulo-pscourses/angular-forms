@@ -103,6 +103,9 @@
 
     <button class="btn btn-primary">Send</button>
   </form>
+  <div [hidden]="!error"
+        class="alert alert-danger"
+      >
+        {{errorMessage}}
+      </div>
 </div>
-<!-- Show the data on the ngForm instance using the json pipe -->
-{{ originalUserSettings | json }}
